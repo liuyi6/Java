@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mall.dao.CustomerDao">
+	
+	<select id="queryCustomerByUserId" resultMap="CustomerMap" parameterType="int">
+		select * from tb_customer where user_id = #{id};
+	</select>
+	
+	<select id="queryCustomerByUserName" resultMap="CustomerMap" parameterType="String">
+		select * from tb_customer where user_name = #{userName};
+	</select>
+	
+	<select id="addCustomer" resultMap="CustomerMap">
+		insert into tb_customer
+		(user_name,password,phone,address,enable_status,create_time,last_edit_time)
+		values
+		(#{userName},#{password},#{phone},#{address},#{enableStatus},#{createTime},#{lastEditTime});
+	</select>
+	
+	<update id="changePassword" parameterType="com.example.mall.entity.Customer">
+		update tb_customer set password = #{password} where user_id = #{userId};
+	</update>
+	
+	<resultMap type="com.example.mall.entity.Customer" id="CustomerMap">
+		<id property="userId" column="use_id"/>
+		<result property="userName" column="user_name"/>
+		<result property="password" column="password"/>
+		<result property="phone" column="phone"/>
+		<result property="address" column="address"/>
+		<result property="enableStatus" column="enable_tatus"/>
+		<result property="createTime" column="create_time"/>
+		<result property="lastEditTime" column="last_edit_time"/>
+	</resultMap>
+</mapper>

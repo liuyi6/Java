@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>燕兴留学</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<!--网站关键词-->
+<meta name="Description" Content="">
+<!--网站简介-->
+<link rel="stylesheet" href="sell/css/common.css" type="text/css" />
+<link rel="stylesheet" href="sell/css/main.css" type="text/css" />
+<script type="text/javascript" src="sell/js/cookie_util.js"></script>
+<script type="text/javascript" src="sell/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="sell/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="sell/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="sell/js/main.js"></script>
+<script type="text/javascript">
+$(function() {
+    var shopId=getCookie("shopId");
+
+    if(shopId==null){
+        window.location.href="log.html";
+    }else {
+    	$(function() {
+			$.ajax({
+				url: "/mall/return/returnOrder.action",
+		        type: "post",
+		        data:{"shopId":shopId},
+		        dataType: "json",
+		        success:function(result){
+		        	var res = result.data;
+		        	for (var i = 0; i < res.length; i++) {
+		        		var orderId = res[i].orderDetailId;
+		        		var proname = res[i].productName;
+		        		var username = res[i].userName;
+		        		var userphone = res[i].userPhone;
+		        		var reason = res[i].returnReason;
+		        		var imgaddr = res[i].imgAddr;
+						$(".sleft ul").append('<li class="commodity_1"><a href=""><img src="'+imgaddr+'"></a><div class="oooo"><a href=""><h2>'+proname+'</h2></a><table style="margin-top: 20px" id="returnTable"><tr><td class="td11">Custom_name:'+username+'</td><td class="td2">Tel：'+userphone+'</td></tr><tr><td colspan="2">Reason：'+reason+'</td></tr></table></div><div class="pppp" ><p class="xiugai" id="'+orderId+'">Agree</p><p class="delete" id="'+orderId+'">Refuse</p></div></li>')
+					}
+		        }
+			});
+	
+			$("#tuihuole").on("click",".xiugai",function(){
+				var id = $(this).attr("id");
+				alert("Agree to return");
+				$.ajax({
+					url:"/mall/return/agreeReturn.action",
+					type:"post",
+					data:{"orderId":id},
+					dataType:"json",
+					success:function(result){
+						/* window.location.href="/mall/tuihuo.html"; */
+						window.location.href="/mall/return/returnOrder.action"
+					}
+				})
+				
+			});
+			
+			$("#tuihuole").on("click",".delete",function(){
+				var id = $(this).attr("id");
+				alert("Refuse to return");
+				$.ajax({
+					url:"/mall/return/disagreeReturn.action",
+					type:"post",
+					data:{"disagreeId":id},
+					dataType:"json",
+					success:function(result){
+						window.location.reload();
+					}
+				})
+				
+			})
+		})
+ 	}
+})
+
+</script>
+</head>
+<body style="background-color: #fff">
+	<div class="nav_header">
+		<div class="w">
+			<div class="user_info">
+				<span class="user not_login"> <a class="link" href="index.html">Hi, welcome to PARKnSHOP !</a> <a
+					class="link js_login">Login or Register</a>
+				</span> <span class="user login"> <span class="link_text">Hi, <a class="link username">username</a>
+				</span> <a class="link js_logout">Exit</a>
+				</span>
+			</div>
+			<ul class="nav_list">
+				<li class="nav_item myshop"><img src="images/index/shop_32px.png"></img> <a id="shop" class="link"> My
+						Shop </a></li>
+				<li class="nav_item"><img src="sell/images/index/shopping_cart_32px.net.png"></img> <a id="cart" class="link">
+						Shopping Cart ( <span class="cart_count">0</span> )
+				</a></li>
+				<li class="nav_item"><a id="my_order" class="link">Orders</a></li>
+				<li class="nav_item"><a id="my_ltt" class="link">Personal Center</a></li>
+				<li class="nav_item"><a class="link">About PARKn</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="whitebg">
+		<div class="normal top2">
+			<div class="logo">
+				<a href=""><img src="images/index/shop_red_64px.png">
+				<h2>PARKnSHOP</h2>
+					<p>welcome to PARKnSHOP !</p></a>
+			</div>
+			<div class="search">
+				<select>
+					<option>product</option>
+					<option>shop</option>
+				</select> <input type="search" name="" class="text" placeholder="Please enter the product name"> <input type="button"
+					value="search" href="" class="search_btn">
+			</div>
+		</div>
+	</div>
+
+
+	<div class="biaoti">
+		<span>Cancel</span>
+		<div class="biaoti1">
+			Cancel
+			<p>
+				Your location：<a href="">Store</a> > <a href="" class="on">Cancel</a>
+			</p>
+		</div>
+	</div>
+
+	<div class="normal mt20">
+
+		<div class="sleft">
+
+
+
+			<ul id="tuihuole">
+				<!-- <li class="commodity_1"><a href=""><img src="images/school.jpg"></a>
+				<div class="oooo">
+						<a href=""><h2>Name</h2></a>
+						<table style="margin-top: 20px">
+							<tr>
+								<td class="td11">Custom_name:</td>
+								<td class="td2">Tel：</td>
+							</tr>
+							<tr>
+								<td colspan="2">Reason：</td>
+							</tr>
+						</table>
+					</div>
+					<div class="pppp">
+						<p class="xiugai">Agree</p>
+						<p class="delete">Refuse</p>
+					</div></li> -->
+
+
+			</ul>
+
+
+		</div>
+		<div class="sright">
+			<img src="sell/images/cancel.jpg" style="display: block; width: 100%; height: auto; margin-top: 20px">
+
+		</div>
+	</div>
+
+
+	<footer class="footer">
+		<ul>
+			<li>About Us</li>
+			<li>Contact Us</li>
+			<li>Terms of Service</li>
+			<li>Privacy Agreement</li>
+			<li>Help</li>
+		</ul>
+		<div class="companyName">
+			<p>Group 3 of Project Management</p>
+		</div>
+	</footer>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+/*#e80012备选颜色*/
+.head{height: 100px;font-size: 50px;padding-left: 200px;line-height: 100px;}
+
+.login_tab{width: 150px;height: 60px;font-size: 20px;color:#666666; line-height: 60px;cursor:pointer;border-bottom: 2px solid #F1F1F1;}
+.login_tab:hover{color:#e80012;}
+.login_box{background: white;border: 1px solid #CCC;width: 380px;height: 400px;border-radius: 10px;position: relative;left: 60%;}
+.login_innerbox{margin-left: 40px;padding-top: 60px;}
+.login_box_input{width: 290px;height: 38px;border: 1px solid #ccc;text-indent:10px;}
+.login_box_input1{width: 290px;height: 40px;}
+.login_box_li{font-size: 13px;line-height: 40px;}
+.login_box_li a:hover {color:#e80012;}
+.user_icon{background-image:url(../images/user_icon.jpg);background-repeat: no-repeat;background-position: right;text-indent:10px;}
+.login_btn{border-radius: 4px;margin-top:10px;width:309px; height:36px;background-image:url(../images/login_btn2.png);}
+
+.footer{
+	width: 100%;
+	height: 100px;
+	float: left;
+	margin-top: 10px;
+	/*border: 1px solid #C9FFA7;*/
+}
+
+
+.footer ul{
+	width: 500px;
+	height:40px;
+	margin:10px auto;
+	line-height: 40px;
+}
+
+.footer ul li{
+	width:auto;
+	margin-right: 20px;
+	float: left;
+	font-size: 13px;
+	font-family: "Î¢ÈíÑÅºÚ";
+	color:black;
+}
+.footer  ul li:hover{
+	color: #e80012;
+	cursor: pointer;
+}
+
+
+.footer .companyName{
+	width: 300px;
+	margin:auto;
+	text-align:center;
+	font-size: 13px;
+	font-family: "Î¢ÈíÑÅºÚ";
+	color:black;
+}
+
+.register_innerbox{margin-left:300px; margin-top: 50px;height: 640px;}
+/*.rgs1{width: 800px;height: 54px;background: pink;margin-bottom: 30px}
+.rgs2{width: 410px;height: 54px;background: red;}
+.rgs3{width: 380px;height: 54px;background: blue;float: left;}*/
+.register_div{float: left;border:1px solid #CCC;width: 410px;height: 54px;margin-bottom: 30px;}
+.register_div label{display: inline-block;width: 90px;height: 52px;line-height: 52px;font-size: 13px;padding-left: 20px;}
+.register_btn{color: white;font-size: 20px;background-image:url(../images/login_btn2.png);width: 410px;height: 52px;border-radius: 5px;}
+.register_tips{float: left;width: 450px;height: 54px;}
+.img{width: 25px;height: 25px;padding-left: 40px;padding-top: 15px;float: left;}
+.tips{line-height: 54px;font-size: 14px;color: #e80012;}

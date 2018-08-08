@@ -1,0 +1,32 @@
+
+
+*{margin:0;padding:0}
+body,button,input,select,textarea{font:12px/1.5 'Microsoft YaHei','SimSun',Tahoma,Geneva,sans-serif;color:#333; background:#f4f4f4}
+
+
+ol,ul{list-style:none}
+
+
+q:before,q:after{content:''}
+a{color:#333;text-decoration:none}
+a,a:active,a:focus,input{outline:none;}
+
+.link{
+    color:#999;
+    cursor: pointer;
+    text-decoration: none;
+}
+.link:hover{
+    color: #e80012;
+}
+.link_text{
+    color:#999;
+    text-decoration: none;
+}
+input[type=button]:hover{
+	cursor: pointer;
+}
+.w{
+	width: 1160px;
+	margin: 0 auto;
+}

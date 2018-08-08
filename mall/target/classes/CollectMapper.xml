@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mall.dao.CollectDao">
+	
+	<select id="queryCollectById" resultMap="CollectMap" parameterType="int">
+		select * from tb_collect where user_id = #{id};
+	</select>
+	
+	<delete id="deletCollect" parameterType="int">
+		delete from tb_collect where collect_id =#{id};
+	</delete>
+	
+	<insert id="addCollect" parameterType="com.example.mall.entity.Collect">
+		insert into tb_collect  
+		(user_id,shop_id,shop_name,create_time,last_edit_time)
+		values
+		(#{customer.userId},#{shop.shopId},#{shop.shopName},#{createTime},#{lastEditTime});
+	</insert>
+	
+	<resultMap type="com.example.mall.entity.Collect" id="CollectMap">
+		<id property="collectId" column="collect_id"/>
+		<result property="createTime" column="create_time"/>
+		<result property="lastEditTime" column="last_edit_time"/>
+		<collection property="customer" ofType="Customer">
+		 	<id property="userId" column="use_id"/>
+			<result property="userName" column="user_name"/>
+			<result property="enableStatus" column="enable_tatus"/>
+			<result property="lastEditTime" column="last_edit_time"/>
+		</collection>
+		<collection property="shop" ofType="Shop">
+			<id property="shopId" column="shop_id"/>
+			<result property="shopName" column="shop_name"/>
+		</collection> 
+	</resultMap>
+	
+</mapper>

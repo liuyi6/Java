@@ -1,0 +1,78 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mall.dao.AdvertisementProductAdminDao">
+	
+	<resultMap type="com.example.mall.entity.AdvertisementProduct" id="AdProduct">
+		<id property="advertisementProductId" column="advertisement_product_id" />
+		<result property="imageUrl" column="image_url" />
+		<result property="productId" column="product_id" />
+		<result property="productUrl" column="product_url" />
+		<result property="enableStatus" column="enable_status" />
+		<result property="createTime" column="create_time" />
+		<result property="lastEditTime" column="last_edit_time" />
+		<result property="price" column="price" />
+		
+		<association property="product" javaType="com.example.mall.entity.Product">
+            <id property="productId" column="product_id" />
+            <result property="productName" column="product_name" />
+            <result property="productPrice" column="product_price" />
+            <result property="productCount" column="product_count" />            
+        </association>     
+	</resultMap>
+	
+	<resultMap type="com.example.mall.entity.Product" id="ProductMap">
+		<id property="productId" column="product_id"/>
+		<result property="shopId" column="shop_id"/>
+		<result property="productDesc" column="product_desc"/>
+		<result property="createTime" column="create_time"/>
+		<result property="lastEditTime" column="last_edit_time"/>
+		<result property="imgAddr" column="img_addr"/>
+		
+		<association property="shop" javaType="com.example.mall.entity.Shop">
+            <id property="shopId" column="shop_id" />
+            <result property="shopName" column="shop_name" />
+        </association>     
+	</resultMap>
+	
+	<select id="queryShopByProductId" resultMap="ProductMap">
+		SELECT *
+		FROM tb_product
+		WHERE product_id = #{productId}
+	</select>
+	
+	<select id="querySuccessfulApplicatonProduct" resultMap="AdProduct" parameterType="java.util.Date">
+		SELECT *
+		FROM tb_advertisement_product
+		WHERE create_time <![CDATA[ >= ]]> #{start} and create_time <![CDATA[ <= ]]> #{end} and enable_status = 1 
+	</select>
+	
+	<update id="refuseAdvertisementProduct">
+		UPDATE tb_advertisement_product
+		SET enable_status = -1
+		where advertisement_product_id = #{id}
+	</update>
+
+	<update id="agreeAdvertisementProduct">
+		UPDATE tb_advertisement_product
+		SET enable_status = 1
+		where advertisement_product_id = #{id}
+	</update>
+	
+	<select id="queryPageAdvertisementProduct"  resultMap="AdProduct">
+		SELECT *
+		FROM tb_advertisement_product as ad,tb_product as product
+		WHERE ad.create_time > #{time} and ad.enable_status = 0 and ad.product_id = product.product_id
+		ORDER BY price DESC
+		LIMIT #{start},#{offset}
+	</select>
+
+	<select id="queryAllAdvertisementProduct" resultMap="AdProduct">
+		SELECT *
+		FROM tb_advertisement_product as ad,tb_product as product
+		WHERE ad.create_time > #{time} and ad.enable_status = 0 and ad.product_id = product.product_id
+		ORDER BY price DESC
+	</select>
+	
+</mapper>

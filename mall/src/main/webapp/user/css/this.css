@@ -1,0 +1,165 @@
+
+hr{
+    background-color:#E80012;
+    border:0;
+    height: 2px;
+}
+
+.center{
+    background-color:#F2F2F2;
+    height:850px;
+}
+
+.center1{
+    margin:0 20px 0 20px;
+}
+
+.func_list{
+    margin-top:20px;
+    width:220px;
+    height:850px;
+    float:left;
+}
+
+.func_list .title{
+    /*margin-top:15px;*/
+    margin-left:20px;
+    font-size:24px;
+    color:#E80012;
+    font-weight: bold;
+    line-height:46px;
+}
+
+.func_list li{
+    padding-left:10px;
+    color:#8b8b8b;
+}
+
+.func_list li h2{
+    margin-left:20px;
+    font-size: 18px;
+    font-weight:normal;
+    line-height: 35px;
+}
+
+.func_list li h3 {
+    margin-left: 20px;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 25px;
+}
+
+/* .current{
+    color:#E80012;
+} */
+
+/*.func_list li a:link{*/
+    /*overflow:hidden;*/
+    /*line-height:40px;*/
+    /*height:28px;*/
+    /*text-decoration:none;*/
+    /*color: #fff;*/
+/*}*/
+
+
+.content{
+    margin-left:60px;
+    width:900px;
+    height:1000px;
+    float:left;
+}
+
+.content .cententshow{
+    margin-top:35px;
+    height:1000px;
+    background-color:#FFFFFF;
+}
+
+.cententshow h2{
+    display:inline;
+    margin-left:50px;
+    line-height:80px;
+    font-size:27px;
+    height:40px;
+}
+
+.cententshow hr{
+    margin:5px 20px;
+    background-color:#8b8b8b;
+    border:0;
+    height:1px;
+}
+
+.info .userinfo{
+    margin-left:30px;
+    margin-top:20px;
+}
+
+.info span{
+    font-size:20px;
+}
+
+.info .form_line{
+    margin-top:10px;
+}
+
+.info .text1{
+    float:right;
+    width:600px;
+}
+
+.btn-submit{
+    margin:20px 200px;
+}
+
+.btn-change{
+    margin-left:0;
+    display:inline-block;
+    padding:0 10px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.timechoose{
+    height:30px;
+    margin-left:10px;
+    margin-bottom:10px;
+    /*background-color:#8b8b8b;*/
+}
+
+.time{
+    float:left;
+    display:block;
+    width:80px;
+    text-align: center;
+    margin-left:-2px;
+    margin-right:1px;
+    font-size:18px;
+    font-weight: normal;
+    line-height:28px;
+    border:1px #8b8b8b solid;
+}
+
+.current1{
+    background-color:#8b8b8b;
+}
+
+.show{
+	height:100px;
+	width:100px;
+}
+.img1{
+    height:100%;
+    width:80px;
+}
+.delete{
+	height:40px;
+	width:40px;
+	margin-left:40px;
+}
+..img1{
+    height:100%;
+    width:40px;
+}

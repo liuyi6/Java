@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mall.dao.ShopAdminDao">
+	<update id="removeShopBlacklist" parameterType="int">
+		UPDATE tb_shop
+		SET enable_status = 1
+		where shop_id = #{shopId}
+	</update>
+	
+	<select id="queryShopList" resultType="com.example.mall.entity.Shop">
+		SELECT shop_id,user_name,shop_name,shop_address,shop_phone,shop_email,enable_status,create_time,last_edit_time
+		FROM tb_shop
+		WHERE enable_status = 1
+	</select>
+	
+	<select id="queryShopBlackList" resultType="com.example.mall.entity.Shop">
+		SELECT shop_id,user_name,shop_name,shop_address,shop_phone,shop_email,enable_status,create_time,last_edit_time
+		FROM tb_shop
+		WHERE enable_status = -1
+	</select>
+	
+	<select id="queryApplyShop" resultType="com.example.mall.entity.Shop">
+		SELECT shop_id,user_name,shop_name,shop_address,shop_phone,shop_email,enable_status,create_time,last_edit_time
+		FROM tb_shop
+		WHERE enable_status = 0
+	</select>
+	
+	<update id="approveShopRequest" parameterType="int">
+		UPDATE tb_shop
+		SET enable_status = 1
+		where shop_id = #{shopId}
+	</update>
+	
+	<update id="refuseShopRequest" parameterType="int">
+		UPDATE tb_shop
+		SET enable_status = -1
+		where shop_id = #{shopId}
+	</update>
+	
+	<select id="queryShopByUserName" parameterType="string" resultType="com.example.mall.entity.Shop">
+		SELECT shop_id,user_name,shop_name,shop_address,shop_phone,shop_email,enable_status,create_time,last_edit_time
+		FROM tb_shop
+		WHERE enable_status = 1 and user_name LIKE '%${value}%'
+	</select>
+	
+	<select id="queryShopByShopName" parameterType="string" resultType="com.example.mall.entity.Shop">
+		SELECT shop_id,user_name,shop_name,shop_address,shop_phone,shop_email,enable_status,create_time,last_edit_time
+		FROM tb_shop
+		WHERE enable_status = 1 and shop_name LIKE '%${value}%'
+	</select>
+	
+	<select id="queryShopByPage" resultType="com.example.mall.entity.Shop">
+		SELECT shop_id,user_name,shop_name,shop_address,shop_phone,shop_email,enable_status,create_time,last_edit_time
+		FROM tb_shop
+		WHERE enable_status = 1
+		LIMIT #{start},#{offset}
+	</select>
+	
+	<select id="queryApplyShopByPage" resultType="com.example.mall.entity.Shop">
+		SELECT shop_id,user_name,shop_name,shop_address,shop_phone,shop_email,enable_status,create_time,last_edit_time
+		FROM tb_shop
+		WHERE enable_status = 0
+		LIMIT #{start},#{offset}
+	</select>
+	
+	<update id="addShopBlackList" parameterType="int">
+		UPDATE tb_shop
+		SET enable_status = -1
+		where shop_id = #{shopId}
+	</update>
+	
+	<delete id="deleteShop" parameterType="int">
+		DELETE FROM tb_shop
+		WHERE shop_id = #{shopId}
+	</delete>
+</mapper>

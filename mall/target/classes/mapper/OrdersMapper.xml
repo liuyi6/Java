@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mall.dao.OrdersDao">
+	
+	<select id="queryDateOrders" resultMap="OrdersMap" parameterType="int">
+		select * from tb_order_product orders
+		inner join tb_order_detail detail on orders.order_detail_id = detail.order_detail_id 
+		inner join tb_shop shop on orders.shop_id = shop.shop_id 
+		inner join tb_product product on orders.product_id = product.product_id 
+		where detail.user_id = #{arg0} and to_days(now()) - to_days(detail.create_time)  &lt;=  #{arg1}  limit #{arg2},5;
+	</select>
+	
+	<select id="queryOrdesInfo" resultMap="OrdersMap" parameterType="int">
+	select * from tb_order_product orders   
+    inner join tb_order_detail detail on orders.order_detail_id = detail.order_detail_id 
+	inner join tb_product product on orders.product_id = product.product_id  
+    inner join tb_shop shop on orders.shop_id = shop.shop_id  
+	where detail.user_id = #{arg0}  limit  #{arg1},5;
+	</select>
+	
+	<select id="queryOrdesInfos" resultMap="OrdersMap" parameterType="int">
+	select * from tb_order_product orders   
+    inner join tb_order_detail detail on orders.order_detail_id = detail.order_detail_id 
+	inner join tb_product product on orders.product_id = product.product_id  
+    inner join tb_shop shop on orders.shop_id = shop.shop_id  
+	where detail.user_id = #{arg0}  and detail.enable_status = #{arg1} limit  #{arg2},5;
+	</select>
+	
+	<select id="queryUnPay" resultMap="OrdersMap" parameterType="int">
+		select * from tb_order_detil,tb_customer where user_id = #{id} and enable_status = 0;
+	</select>
+	
+	<select id="queryOrdersById" resultMap="OrdersMap" parameterType="int">
+		select * from tb_order_detail,tb_shop,tb_product,tb_order_product where order_detail_id = #{id};
+	</select>
+	
+	<insert id="addOrders" parameterType="com.example.mall.entity.Orders">
+		insert into tb_order_product 
+		(order_detail_id,product_id,shop_id,shop_name,product_amount,product_price,all_price,create_time,last_edit_time)
+		values
+		(#{ordersDetail.orderDetailId},#{product.productId},#{shop.shopId},#{shop.shopName},#{ordersDetail.amount},#{product.productPrice},#{ordersDetail.price},#{createTime},#{lastEditTime});
+	</insert>
+	<resultMap type="com.example.mall.entity.Orders" id="OrdersMap">
+		<id property="ordersId" column="order_product_id"/>
+		<result property="price" column="all_price"/>
+		<result property="createTime" column="create_time"/>
+		<result property="lastEditTime" column="last_edit_time"/>
+		<collection property="ordersDetail"  ofType="OrdersDetail">
+			<id property="orderDetailId" column="order_detail_id"/>
+			<result property="amount" column="all_amount"/>
+			<result property="price" column="all_price"/>
+			<result property="enableStatus" column="enable_status"/>
+			<result property="returnStatus" column="return_status"/>
+			<result property="returnReason" column="return_reason"/>
+		</collection>
+		<collection property="product" ofType="Product">
+			<id property="productId" column="product_id"/>
+			<result property="productName" column="product_name"/>
+			<result property="productDesc" column="product_desc"/>
+			<result property="productPrice" column="product_price"/>
+			<result property="imgAddr" column="img_addr"/>
+			<result property="shopId" column="shop_id"/>
+		</collection>
+		<collection property="shop" ofType="Shop">
+			<id property="shopId" column="shop_id"/>
+			<id property="shopName" column="shop_name"/>
+		</collection>
+	</resultMap>
+</mapper>
